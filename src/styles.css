@@ -1,1 +1,126 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	padding: 30px;
+	background-color: #F4E0BD; /* Pink */
+	color: #512B1E; /* Dark brown */
+}
+
+#logo{
+	display: block;
+	margin: auto;
+	width: 200px;
+	height: auto;
+}
+h1{
+	font-family: 'Abril Fatface', cursive;
+	text-align: center;
+	padding: 20px;
+}
+
+#about{
+	background-color: white;
+	padding: 15px 30px;
+	border-radius: 5px;
+	border: 3px solid #A4B9BC; /* Blue */
+}
+h2{
+    font-family: 'Abril Fatface', cursive;
+	font-size: 22px;
+	text-align: center;
+	font-weight: 600;
+}
+
+#gallery{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.gallery-tile {
+	width: 250px;
+	height: auto;
+}
+h3{
+	font-family: 'Abril Fatface', cursive;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 600;
+}
+.beerImage{
+	width:90%;
+	height: auto;
+	display: block;
+	margin: auto;
+	border-radius: 5px;
+	border: 3px solid #A4B9BC; /* Blue */
+	opacity: 0.8;
+	cursor: pointer;
+	transition: width 0.5s, opacity 0.5s;
+}
+.beerImage:hover{
+	width:95%;
+	opacity: 1;
+}
+
+/*Footer*/
+#homeMenu, #socialMenu{
+	display: flex;
+	justify-content: center;
+}
+.socialIcon{
+	margin: 10px 15px;
+}
+a{
+	text-decoration: none;
+	color: #512B1E; /* Dark brown */
+}
+#infoMenu{
+	text-align: center;
+}
+
+#map {
+	height: 450px;
+	width: 95% auto;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+

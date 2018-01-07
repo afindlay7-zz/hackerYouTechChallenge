@@ -1,0 +1,26 @@
+<div class="gallery-tile" (click)="tileClick()">
+  <h3>{{product.name}}</h3>
+  <div *ngIf="product.image_url">
+      <img class="beerImage" src="{{product.image_url}}">
+  </div>
+  <div *ngIf="product.image_url == null">
+      <img class="beerImage" src="../../assets/beausCrop.jpg">
+  </div> 
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content" >
+        <div class="modal-header">
+            <span class="close" (click)="spanClick()">&times;</span>
+            <h2>{{product.name}}</h2>
+        </div>
+        <div class="modal-body">
+            <p>Some text in the Modal Body</p>
+            <p>Some other text...</p>
+        </div>
+    </div>
+</div>
+
+
+
+
