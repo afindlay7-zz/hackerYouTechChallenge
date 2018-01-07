@@ -23,8 +23,12 @@ export class GalleryComponent implements OnInit {
 
   numBeausProducts:Number;
   beausProducts:ProductsModel[] = [];
+  userLat:Number;
+  userLng:Number;
+  location = {};
 
-  constructor(private http:Http) { }
+  constructor(private http:Http) { 
+  }
 
   ngOnInit() {
     this.http.get(this.lcboProductsURL)
@@ -33,7 +37,7 @@ export class GalleryComponent implements OnInit {
   }
 
   displayTiles(res){
-    console.log(res);
+    console.log('PRODUCTS RESPONSE', res);
     this.numBeausProducts = res.pager.total_record_count; 
     for (let i=0; i<this.numBeausProducts; i++){
       this.beausProducts[i] = new ProductsModel(i, res.result[i].name, res.result[i].id, res.result[i].image_url, res.result[i].description, res.result[i].primary_category, res.result[i].secondary_category, res.result[i].serving_suggestion);

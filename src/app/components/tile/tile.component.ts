@@ -31,11 +31,18 @@ export class TileComponent implements OnInit {
   }
 
   displayMap(res){
-    console.log(res);
+
+    this.http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCVYl5QhcV8QotbaBkdqaWxMzWc9DGWHMk',
+    {"considerIp": "true",
+    }).map( res => console.log('GOOGLE RESPONSE', res.json()))
+    .subscribe();
+
+    console.log('STORES RESPONSE', res);
     this.numBeausStores = res.pager.total_record_count; 
     for (let i=0; i<this.numBeausStores; i++){
       this.beausStores[i] = new StoresModel(res.result[i].address_line_1, res.result[i].address_line_2, res.result[i].id, res.result[i].latitude, res.result[i].longitude, res.result[i].name, res.result[i].telephone);
     }
+
   }
 
   // When the user clicks on <span> (x), close the modal
