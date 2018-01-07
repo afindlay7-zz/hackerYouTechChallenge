@@ -1,4 +1,4 @@
-<div class="gallery-tile" (click)="tileClick()">
+<div class="gallery-tile" (click)="tileClick($event)">
   <h3>{{product.name}}</h3>
   <div *ngIf="product.image_url">
       <img class="beerImage" src="{{product.image_url}}">
@@ -8,15 +8,16 @@
   </div> 
 </div>
 
-<div id="myModal" class="modal">
+<div class="modal" [hidden]="!openModal">
     <div class="modal-content" >
         <div class="modal-header">
             <span class="close" (click)="spanClick()">&times;</span>
             <h2>{{product.name}}</h2>
         </div>
         <div class="modal-body">
-            <p>Some text in the Modal Body</p>
-            <p>Some other text...</p>
+            <p *ngIf="product.description">Description: {{product.description}}</p>
+            <p *ngIf="product.primary_category || product.secondary_category">Categories: {{product.primary_category}} - {{product.secondary_category}}</p>
+            <p *ngIf="product.serving_suggestion">Serving Suggestion: {{product.serving_suggestion}}</p>
         </div>
     </div>
 </div>

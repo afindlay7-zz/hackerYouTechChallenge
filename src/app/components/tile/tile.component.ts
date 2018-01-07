@@ -9,28 +9,20 @@ import { ProductsModel } from '../../models/products.model';
 
 export class TileComponent implements OnInit {
   @Input() product:ProductsModel; 
-  @Output() changeProduct = new EventEmitter<Object>();
-  modal = document.getElementById('myModal'); // Get the modal
-  name:string;
+  openModal:boolean;
 
   constructor() { }
 
   ngOnInit() { }
 
   // When the user clicks on the button, open the modal 
-  tileClick(event) {
-    this.changeProduct.emit(this.product);
-    console.log('name: ', this.product.name);
-    this.modal = document.getElementById('myModal');
-    this.modal.style.display = "block";
+  tileClick(event:Event) {
+    this.openModal = true;
   }
 
   // When the user clicks on <span> (x), close the modal
   spanClick() {
-    this.changeProduct.emit(this.product);
-    console.log('span click');
-    this.modal = document.getElementById('myModal');
-    this.modal.style.display = "none";
+    this.openModal = false
   }
 
 }
