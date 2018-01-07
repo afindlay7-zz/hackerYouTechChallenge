@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { HttpModule, Http } from '@angular/http';
 import { ProductsModel } from '../../models/products.model';
 import { StoresModel } from '../../models/stores.model';
-import { HttpModule, Http } from '@angular/http';
+import { LcboService } from '../../services/lcbo.service';
 
 @Component({
   selector: 'app-tile',
@@ -11,38 +12,27 @@ import { HttpModule, Http } from '@angular/http';
 
 export class TileComponent implements OnInit {
   @Input() product:ProductsModel; 
+  @Input() latitude:Number;
+  @Input() longitude:Number;
   openModal:boolean;
-  lcboStoresURL:string 
-  numBeausStores:Number;
   beausStores:StoresModel[] = [];
 
-  constructor(private http:Http) { }
+  constructor(private http:Http, private lcboService:LcboService) { }
 
   ngOnInit() { }
 
   // When the user clicks on the button, open the modal 
   tileClick(event:Event) {
     this.openModal = true;
-
-    this.lcboStoresURL = 'https://lcboapi.com/stores?product_id=' + this.product.id + '&access_key=MDoxMWJlZTgzNi1mMzA3LTExZTctOTE2NS0xZmIyOTNiMGVkNDg6RjhLMWd0UEQ2SWZlRHVrbFBwVFhtNUZPQjI5RzNNSjhlWTRp';
-    this.http.get(this.lcboStoresURL)
-      .map( res => this.displayMap(res.json()))
-      .subscribe(); 
+    // Get Lcbo stores that carry the selected Beau's product
+    this.lcboService.getStores(this.product.id).subscribe( res => this.displayMap(res));
   }
 
   displayMap(res){
-
-    this.http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCVYl5QhcV8QotbaBkdqaWxMzWc9DGWHMk',
-    {"considerIp": "true",
-    }).map( res => console.log('GOOGLE RESPONSE', res.json()))
-    .subscribe();
-
     console.log('STORES RESPONSE', res);
-    this.numBeausStores = res.pager.total_record_count; 
-    for (let i=0; i<this.numBeausStores; i++){
+    for (let i=0; i<res.pager.total_record_count; i++){
       this.beausStores[i] = new StoresModel(res.result[i].address_line_1, res.result[i].address_line_2, res.result[i].id, res.result[i].latitude, res.result[i].longitude, res.result[i].name, res.result[i].telephone);
     }
-
   }
 
   // When the user clicks on <span> (x), close the modal
