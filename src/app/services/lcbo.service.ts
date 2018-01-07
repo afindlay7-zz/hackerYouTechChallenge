@@ -21,17 +21,16 @@ export class LcboService {
 
   constructor(private http:Http) { }
 
-  ngOnInit() { }
-
   getProducts(): Observable<string>{
-    this.productsObservable = this.http.get(this.lcboProductsURL).map( res => res.json()); 
+    this.productsObservable = this.http.get(this.lcboProductsURL)
+      .map( res => res.json()); 
     return this.productsObservable;
   }
 
   getStores(productID:string): Observable<string> {
     this.lcboStoresURL =  this.storesBaseURL + 'product_id=' + productID + this.access_key;
-    this.storesObservable = this.http.get(this.lcboStoresURL).map( res => res.json());
+    this.storesObservable = this.http.get(this.lcboStoresURL)
+      .map( res => res.json());
     return this.storesObservable;
   }
-
 }

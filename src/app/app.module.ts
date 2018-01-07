@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -11,7 +11,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { TileComponent } from './components/tile/tile.component';
 
 import { LcboService } from './services/lcbo.service';
-import { ModalComponent } from './components/modal/modal.component';
+import { GoogleService } from './services/google.service';
 
 
 @NgModule({
@@ -21,15 +21,15 @@ import { ModalComponent } from './components/modal/modal.component';
     FooterComponent,
     AboutComponent,
     GalleryComponent,
-    TileComponent,
-    ModalComponent
+    TileComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-    ReactiveFormsModule
+    HttpModule,AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCVYl5QhcV8QotbaBkdqaWxMzWc9DGWHMk'
+    })
   ],
-  providers: [LcboService],
+  providers: [LcboService, GoogleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

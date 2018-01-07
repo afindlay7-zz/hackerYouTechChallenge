@@ -18,13 +18,14 @@
             <p *ngIf="product.description">Description: {{product.description}}</p>
             <p *ngIf="product.primary_category || product.secondary_category">Categories: {{product.primary_category}} - {{product.secondary_category}}</p>
             <p *ngIf="product.serving_suggestion">Serving Suggestion: {{product.serving_suggestion}}</p>
-        </div>
-        <div class="modal-map">
-            
+            <agm-map [latitude]="51.678418" [longitude]="7.809007" style="height:300px">
+                <agm-marker [latitude]="51.678418" [longitude]="7.809007">
+                    <agm-info-window>Börk</agm-info-window>
+                </agm-marker>
+            </agm-map>
         </div>
     </div>
 </div>
-
 
 
 
