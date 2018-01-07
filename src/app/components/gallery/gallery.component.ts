@@ -24,7 +24,6 @@ export class GalleryComponent implements OnInit {
   numBeausProducts:Number;
   beausProducts:ProductsModel[] = [];
 
-
   constructor(private http:Http) { }
 
   ngOnInit() {
