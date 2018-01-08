@@ -8,7 +8,7 @@
   </div> 
 </div>
 
-<div class="modal" [hidden]="!openModal">
+<div class="modal" [hidden]="!openModal" *ngIf="readyToDisplay">
     <div class="modal-content" >
         <div class="modal-header">
             <span class="close" (click)="spanClick()">&times;</span>
@@ -17,10 +17,13 @@
         <div class="modal-body">
             <p *ngIf="product.description">Description: {{product.description}}</p>
             <p *ngIf="product.primary_category || product.secondary_category">Categories: {{product.primary_category}} - {{product.secondary_category}}</p>
-            <p *ngIf="product.serving_suggestion">Serving Suggestion: {{product.serving_suggestion}}</p>
-            <agm-map [latitude]="51.678418" [longitude]="7.809007" style="height:300px">
-                <agm-marker [latitude]="51.678418" [longitude]="7.809007">
-                    <agm-info-window>Börk</agm-info-window>
+            <p *ngIf="product.serving_suggestion">Serving Suggestion: {{product.serving_suggestion}}</p> 
+            <agm-map [latitude]="userLat" [longitude]="userLng">
+                <agm-marker 
+                    *ngFor="let store of beausStores"
+                    [latitude]="store.latitude" 
+                    [longitude]="store.longitude">
+                    <agm-info-window>{{store.name}}</agm-info-window>
                 </agm-marker>
             </agm-map>
         </div>

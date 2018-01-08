@@ -16,18 +16,18 @@ export class LcboService {
   lcboProductsURL:string =  this.productsBaseURL + this.producer_name + this.is_seasonal + this.is_dead + this.access_key;
   lcboStoresURL:string;
 
-  productsObservable:Observable<string>;
-  storesObservable:Observable<string>;
+  productsObservable:Observable<any>;
+  storesObservable:Observable<any>;
 
   constructor(private http:Http) { }
 
-  getProducts(): Observable<string>{
+  getProducts(): Observable<any>{
     this.productsObservable = this.http.get(this.lcboProductsURL)
       .map( res => res.json()); 
     return this.productsObservable;
   }
 
-  getStores(productID:string): Observable<string> {
+  getStores(productID:string): Observable<any> {
     this.lcboStoresURL =  this.storesBaseURL + 'product_id=' + productID + this.access_key;
     this.storesObservable = this.http.get(this.lcboStoresURL)
       .map( res => res.json());

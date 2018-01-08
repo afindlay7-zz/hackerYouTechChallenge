@@ -118,5 +118,9 @@ a{
     cursor: pointer;
 }
 
+agm-map {
+	height: 400px;
+}
+
 
 

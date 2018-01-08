@@ -3,7 +3,6 @@ import { HttpModule, Http } from '@angular/http';
 import { ProductsModel } from '../../models/products.model';
 import { StoresModel } from '../../models/stores.model';
 import { LcboService } from '../../services/lcbo.service';
-declare const google: any;
 
 @Component({
   selector: 'app-tile',
@@ -13,26 +12,25 @@ declare const google: any;
 
 export class TileComponent implements OnInit {
   @Input() product:ProductsModel; 
-  @Input() latitude:Number;
-  @Input() longitude:Number;
+  @Input() userLat:Number;
+  @Input() userLng:Number;
   openModal:boolean;
   beausStores:StoresModel[] = [];
+  firstLat:number;
+  firstLng:number;
+  readyToDisplay:boolean = false;
+
 
   constructor(private http:Http, private lcboService:LcboService) { }
 
-  ngOnInit() { 
-
-  }
-  ngAfterViewInit() {
-
-  }
+  ngOnInit() { }
 
   // When the user clicks on the button, open the modal 
   tileClick(event:Event) {
     this.openModal = true;
     // Get Lcbo stores that carry the selected Beau's product
     this.lcboService.getStores(this.product.id).subscribe( res => this.displayMap(res));
-    
+
     setTimeout(() => {
       window.dispatchEvent(new Event("resize"));
     }, 1);
@@ -40,16 +38,23 @@ export class TileComponent implements OnInit {
 
   displayMap(res){
     console.log('STORES RESPONSE', res);
-    for (let i=0; i<res.pager.total_record_count; i++){
-      this.beausStores[i] = new StoresModel(res.result[i].address_line_1, res.result[i].address_line_2, res.result[i].id, res.result[i].latitude, res.result[i].longitude, res.result[i].name, res.result[i].telephone);
+    for (let i=0; i<res.result.length; i++){
+      this.beausStores.push({
+        address_line_1: res.result[i].address_line_1,
+        address_line_2: res.result[i].address_line_2,
+        id: res.result[i].id,
+        latitude: res.result[i].latitude,
+        longitude: res.result[i].longitude,
+        name: res.result[i].name,
+        telephone: res.result[i].telephone
+      });
     }
-   
-
+    this.readyToDisplay = true;
   }
   
   // When the user clicks on <span> (x), close the modal
   spanClick() {
     this.openModal = false
+    this.readyToDisplay = false;
   }
-
 }
