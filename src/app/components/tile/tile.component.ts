@@ -20,9 +20,7 @@ export class TileComponent implements OnInit {
   firstLng:number;
   readyToDisplay:boolean = false;
 
-
   constructor(private http:Http, private lcboService:LcboService) { }
-
   ngOnInit() { }
 
   // When the user clicks on the button, open the modal 
@@ -30,10 +28,6 @@ export class TileComponent implements OnInit {
     this.openModal = true;
     // Get Lcbo stores that carry the selected Beau's product
     this.lcboService.getStores(this.product.id).subscribe( res => this.displayMap(res));
-
-    setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
-    }, 1);
   }
 
   displayMap(res){
@@ -42,6 +36,7 @@ export class TileComponent implements OnInit {
       this.beausStores.push({
         address_line_1: res.result[i].address_line_1,
         address_line_2: res.result[i].address_line_2,
+        city: res.result[i].city,
         id: res.result[i].id,
         latitude: res.result[i].latitude,
         longitude: res.result[i].longitude,

@@ -6,8 +6,10 @@ export class ProductsModel {
     public primary_category:string;
     public secondary_category:string;
     public serving_suggestion:string;
+    public origin:string;
+    public style:string;
 
-    constructor(name:string, id:string, image_url:string, description:string, primary_category:string, secondary_category:string, serving_suggestion:string){
+    constructor(name:string, id:string, image_url:string, description:string, primary_category:string, secondary_category:string, serving_suggestion:string, origin:string, style:string){
         this.name = name;
         this.id = id;
         this.image_url = image_url;
@@ -15,5 +17,7 @@ export class ProductsModel {
         this.primary_category = primary_category;
         this.secondary_category = secondary_category;
         this.serving_suggestion = serving_suggestion;
+        this.origin = origin;
+        this.style = style;
     }
 }

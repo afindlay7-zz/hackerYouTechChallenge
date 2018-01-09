@@ -34,7 +34,7 @@ export class GalleryComponent implements OnInit {
   displayTiles(res){
     console.log('PRODUCTS RESPONSE', res);
     for (let i=0; i<res.result.length; i++){
-      this.beausProducts[i] = new ProductsModel(res.result[i].name, res.result[i].id, res.result[i].image_url, res.result[i].description, res.result[i].primary_category, res.result[i].secondary_category, res.result[i].serving_suggestion);
+      this.beausProducts[i] = new ProductsModel(res.result[i].name, res.result[i].id, res.result[i].image_url, res.result[i].description, res.result[i].primary_category, res.result[i].secondary_category, res.result[i].serving_suggestion, res.result[i].origin, res.result[i].style);
     }
   }
 }

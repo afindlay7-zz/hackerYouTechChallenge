@@ -15,15 +15,26 @@
             <h2>{{product.name}}</h2>
         </div>
         <div class="modal-body">
-            <p *ngIf="product.description">Description: {{product.description}}</p>
-            <p *ngIf="product.primary_category || product.secondary_category">Categories: {{product.primary_category}} - {{product.secondary_category}}</p>
-            <p *ngIf="product.serving_suggestion">Serving Suggestion: {{product.serving_suggestion}}</p> 
-            <agm-map [latitude]="userLat" [longitude]="userLng">
+            <p *ngIf="product.description"><strong>Description: </strong>{{product.description}}</p>
+            <p *ngIf="product.primary_category || product.secondary_category"><strong>Categories: </strong>{{product.primary_category}} - {{product.secondary_category}}</p>
+            <p *ngIf="product.serving_suggestion"><strong>Serving Suggestion: </strong>{{product.serving_suggestion}}</p>
+            <p *ngIf="product.origin"><strong>Origin: </strong>{{product.origin}}</p>
+            <p *ngIf="product.style"><strong>Style: </strong>{{product.style}}</p> 
+            <h3>Sold at the following locations near you:</h3>
+            <agm-map 
+                [latitude]="userLat" 
+                [longitude]="userLng"
+                [zoom]=10>
                 <agm-marker 
                     *ngFor="let store of beausStores"
                     [latitude]="store.latitude" 
                     [longitude]="store.longitude">
-                    <agm-info-window>{{store.name}}</agm-info-window>
+                    <agm-info-window>
+                        <strong>{{store.name}}</strong>  
+                        <p><strong>Address: </strong>{{store.address_line_1}}</p>
+                        <p><strong>Telephone: </strong>{{store.telephone}}</p>
+                        <a href="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCHbKnzJyqtyGD73OT9xVG1h7Ps9KhWJ0k&origin={{userLat}},{{userLng}}&destination={{store.address_line_1}}+{{store.city}}" target="_blank">Get directions</a>
+                    </agm-info-window>
                 </agm-marker>
             </agm-map>
         </div>
