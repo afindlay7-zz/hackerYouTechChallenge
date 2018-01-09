@@ -21,6 +21,7 @@
             <p *ngIf="product.origin"><strong>Origin: </strong>{{product.origin}}</p>
             <p *ngIf="product.style"><strong>Style: </strong>{{product.style}}</p> 
             <h3>Sold at the following locations near you:</h3>
+            <!-- Google Maps JavaScript API -->
             <agm-map 
                 [latitude]="userLat" 
                 [longitude]="userLng"
@@ -33,7 +34,8 @@
                         <strong>{{store.name}}</strong>  
                         <p><strong>Address: </strong>{{store.address_line_1}}</p>
                         <p><strong>Telephone: </strong>{{store.telephone}}</p>
-                        <a href="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCHbKnzJyqtyGD73OT9xVG1h7Ps9KhWJ0k&origin={{userLat}},{{userLng}}&destination={{store.address_line_1}}+{{store.city}}" target="_blank">Get directions</a>
+                        <!-- Google Maps Embed API -->
+                        <a href="https://www.google.com/maps/embed/v1/directions?{{googleAPIKey}}&origin={{userLat}},{{userLng}}&destination={{store.address_line_1}}+{{store.city}}" target="_blank">Get directions</a>
                     </agm-info-window>
                 </agm-marker>
             </agm-map>

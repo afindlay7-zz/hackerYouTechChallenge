@@ -10,7 +10,6 @@ export class LcboService {
   producer_name:string = 'q=beau\'s+all+natural+brewing';
   is_seasonal:string = '&where=is_seasonal';
   is_dead:string = '&where_not=is_dead';
-  per_page:string = '&per_page=200'; //not working
   access_key:string = '&access_key=MDoxMWJlZTgzNi1mMzA3LTExZTctOTE2NS0xZmIyOTNiMGVkNDg6RjhLMWd0UEQ2SWZlRHVrbFBwVFhtNUZPQjI5RzNNSjhlWTRp';
   
   lcboProductsURL:string =  this.productsBaseURL + this.producer_name + this.is_seasonal + this.is_dead + this.access_key;

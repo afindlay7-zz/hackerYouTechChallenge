@@ -3,6 +3,7 @@ import { HttpModule, Http } from '@angular/http';
 import { ProductsModel } from '../../models/products.model';
 import { StoresModel } from '../../models/stores.model';
 import { LcboService } from '../../services/lcbo.service';
+import { GoogleService } from '../../services/google.service';
 
 @Component({
   selector: 'app-tile',
@@ -14,14 +15,16 @@ export class TileComponent implements OnInit {
   @Input() product:ProductsModel; 
   @Input() userLat:Number;
   @Input() userLng:Number;
-  openModal:boolean;
   beausStores:StoresModel[] = [];
-  firstLat:number;
-  firstLng:number;
   readyToDisplay:boolean = false;
+  openModal:boolean;
+  googleAPIKey:string;
 
-  constructor(private http:Http, private lcboService:LcboService) { }
-  ngOnInit() { }
+  constructor(private http:Http, private lcboService:LcboService, private googleService:GoogleService) { }
+  
+  ngOnInit() { 
+    this.googleAPIKey = this.googleService.googleAPIKey;
+  }
 
   // When the user clicks on the button, open the modal 
   tileClick(event:Event) {
