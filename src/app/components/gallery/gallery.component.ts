@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
 import { ProductsModel } from '../../models/products.model';
 import { LcboService } from '../../services/lcbo.service';
-import { GoogleService } from '../../services/google.service';
 
 @Component({
   selector: 'app-gallery',
@@ -14,21 +13,37 @@ export class GalleryComponent implements OnInit {
   beausProducts:ProductsModel[] = [];
   userLat:Number;
   userLng:Number;
+  geolocationPosition;
 
-  constructor(private http:Http, private lcboService:LcboService, private googleService:GoogleService) { }
+  constructor(private http:Http, private lcboService:LcboService) { }
 
   ngOnInit() {
-    // Get users geolocation using Google Maps Geolocation API (Google Maps API - Web Services)
-    this.googleService.getGeolocation().subscribe( res => this.setGeolocation(res));
-    
+    // Get users geolocation
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+          position => {
+              console.log('GEOLOCATION', position),
+              this.userLat = position.coords.latitude,
+              this.userLng = position.coords.longitude
+          },
+          error => {
+              switch (error.code) {
+                  case 1:
+                      console.log('Permission Denied');
+                      break;
+                  case 2:
+                      console.log('Position Unavailable');
+                      break;
+                  case 3:
+                      console.log('Timeout');
+                      break;
+              }
+          }
+      );
+    };
+
     // Get Beaus products that meet the specifications
     this.lcboService.getProducts().subscribe( res => this.displayTiles(res));
-  }
-
-  setGeolocation(res){
-    console.log('GOOGLE RESPONSE', res);
-    this.userLat = res.location.lat;
-    this.userLng = res.location.lng
   }
 
   displayTiles(res){

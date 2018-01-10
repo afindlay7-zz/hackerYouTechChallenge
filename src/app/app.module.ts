@@ -11,8 +11,6 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { TileComponent } from './components/tile/tile.component';
 
 import { LcboService } from './services/lcbo.service';
-import { GoogleService } from './services/google.service';
-
 
 @NgModule({
   declarations: [
@@ -29,7 +27,7 @@ import { GoogleService } from './services/google.service';
       apiKey: 'AIzaSyCVYl5QhcV8QotbaBkdqaWxMzWc9DGWHMk'
     })
   ],
-  providers: [LcboService, GoogleService],
+  providers: [LcboService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
